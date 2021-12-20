@@ -18,11 +18,17 @@ bi_chain_cpp <- function(num = 10000L, a = 1L, b = 1L, n = 100L) {
     .Call('_StatComp21077_bi_chain_cpp', PACKAGE = 'StatComp21077', num, a, b, n)
 }
 
-#' @title example
-#' @description A Gibbs sampler using Rcpp, the target density has been given.
-#' @return Constant matrix.
+#' @title gamma fit approximate newton method
+#' @description fit gamma model with approximate newton method.
+#' @param x Input matrix, of dimension \eqn{n \times p}; each row is an observation vector and each column is a predictor/feature/variable.
+#' @param y The response variable, of \code{n} observations.
+#' @param weights Observation weights.
+#' @param beta Linear coefficient.
+#' @param coef0 Intercept.
+#' @param lambda L2 penalty coefficient.
+#' @return NULL
 #' @export
-myfun <- function() {
-    .Call('_StatComp21077_myfun', PACKAGE = 'StatComp21077')
+gamma_fit_approximate_newton_method <- function(x, y, weights, beta, coef0, lambda) {
+    invisible(.Call('_StatComp21077_gamma_fit_approximate_newton_method', PACKAGE = 'StatComp21077', x, y, weights, beta, coef0, lambda))
 }
 
