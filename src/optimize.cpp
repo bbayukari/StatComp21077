@@ -54,7 +54,6 @@ double loss_function(Eigen::MatrixXd &X, Eigen::VectorXd &y, Eigen::VectorXd &we
 //' @param coef0 Intercept.
 //' @param lambda L2 penalty coefficient.
 //' @return NULL
-//' @export
 //[[Rcpp::export]]
 void gamma_fit_approximate_newton_method(Eigen::MatrixXd &x, Eigen::VectorXd &y, Eigen::VectorXd &weights, Eigen::VectorXd &beta, double &coef0, double lambda)
 {
