@@ -16,3 +16,13 @@ Imports:
 LinkingTo: 
     Rcpp,
     RcppEigen
+Suggests: 
+    rmarkdown,
+    knitr,
+    bootstrap,
+    boot,
+    RANN,
+    energy,
+    Ball,
+    parallel
+VignetteBuilder: knitr

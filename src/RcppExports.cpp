@@ -26,24 +26,42 @@ BEGIN_RCPP
 END_RCPP
 }
 // gamma_fit_approximate_newton_method
-void gamma_fit_approximate_newton_method(Eigen::MatrixXd& x, Eigen::VectorXd& y, Eigen::VectorXd& weights, Eigen::VectorXd& beta, double& coef0, double lambda);
+Eigen::VectorXd gamma_fit_approximate_newton_method(Eigen::MatrixXd x, Eigen::VectorXd y, Eigen::VectorXd weights, Eigen::VectorXd beta, double coef0, double lambda);
 RcppExport SEXP _StatComp21077_gamma_fit_approximate_newton_method(SEXP xSEXP, SEXP ySEXP, SEXP weightsSEXP, SEXP betaSEXP, SEXP coef0SEXP, SEXP lambdaSEXP) {
 BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Eigen::MatrixXd& >::type x(xSEXP);
-    Rcpp::traits::input_parameter< Eigen::VectorXd& >::type y(ySEXP);
-    Rcpp::traits::input_parameter< Eigen::VectorXd& >::type weights(weightsSEXP);
-    Rcpp::traits::input_parameter< Eigen::VectorXd& >::type beta(betaSEXP);
-    Rcpp::traits::input_parameter< double& >::type coef0(coef0SEXP);
+    Rcpp::traits::input_parameter< Eigen::MatrixXd >::type x(xSEXP);
+    Rcpp::traits::input_parameter< Eigen::VectorXd >::type y(ySEXP);
+    Rcpp::traits::input_parameter< Eigen::VectorXd >::type weights(weightsSEXP);
+    Rcpp::traits::input_parameter< Eigen::VectorXd >::type beta(betaSEXP);
+    Rcpp::traits::input_parameter< double >::type coef0(coef0SEXP);
     Rcpp::traits::input_parameter< double >::type lambda(lambdaSEXP);
-    gamma_fit_approximate_newton_method(x, y, weights, beta, coef0, lambda);
-    return R_NilValue;
+    rcpp_result_gen = Rcpp::wrap(gamma_fit_approximate_newton_method(x, y, weights, beta, coef0, lambda));
+    return rcpp_result_gen;
+END_RCPP
+}
+// gamma_fit_IWLS_method
+Eigen::VectorXd gamma_fit_IWLS_method(Eigen::MatrixXd x, Eigen::VectorXd y, Eigen::VectorXd weights, Eigen::VectorXd beta, double coef0, double lambda);
+RcppExport SEXP _StatComp21077_gamma_fit_IWLS_method(SEXP xSEXP, SEXP ySEXP, SEXP weightsSEXP, SEXP betaSEXP, SEXP coef0SEXP, SEXP lambdaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Eigen::MatrixXd >::type x(xSEXP);
+    Rcpp::traits::input_parameter< Eigen::VectorXd >::type y(ySEXP);
+    Rcpp::traits::input_parameter< Eigen::VectorXd >::type weights(weightsSEXP);
+    Rcpp::traits::input_parameter< Eigen::VectorXd >::type beta(betaSEXP);
+    Rcpp::traits::input_parameter< double >::type coef0(coef0SEXP);
+    Rcpp::traits::input_parameter< double >::type lambda(lambdaSEXP);
+    rcpp_result_gen = Rcpp::wrap(gamma_fit_IWLS_method(x, y, weights, beta, coef0, lambda));
+    return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
     {"_StatComp21077_bi_chain_cpp", (DL_FUNC) &_StatComp21077_bi_chain_cpp, 4},
     {"_StatComp21077_gamma_fit_approximate_newton_method", (DL_FUNC) &_StatComp21077_gamma_fit_approximate_newton_method, 6},
+    {"_StatComp21077_gamma_fit_IWLS_method", (DL_FUNC) &_StatComp21077_gamma_fit_IWLS_method, 6},
     {NULL, NULL, 0}
 };
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/generate.data.R
 \name{generate.data}
 \alias{generate.data}
-\title{Generate simulated data}
+\title{Generate simulated data.}
 \usage{
 generate.data(
   n,

@@ -59,7 +59,7 @@ Eigen::VectorXd gamma_fit_approximate_newton_method(Eigen::MatrixXd x, Eigen::Ve
 {
     int n = x.rows();
     int p = x.cols();
-
+    int max_iter = 80;
     Eigen::VectorXd coef = Eigen::VectorXd::Zero(p + 1);
     if (p == 0)
     {
@@ -92,7 +92,7 @@ Eigen::VectorXd gamma_fit_approximate_newton_method(Eigen::MatrixXd x, Eigen::Ve
     beta = coef.tail(p);
     double loglik_new, loglik = -loss_function(x,y,weights,beta,coef0,lambda);
 
-    for (int j = 0; j < 200; j++)
+    for (int j = 0; j < max_iter; j++)
     {
         for (int i = 0; i < p + 1; i++)
         {
@@ -135,7 +135,7 @@ Eigen::VectorXd gamma_fit_approximate_newton_method(Eigen::MatrixXd x, Eigen::Ve
         EY = expect_y(X, coef);
         W = EY.array().square() * weights.array();
     }
-    
+
     return coef;
 }
 
@@ -154,7 +154,7 @@ Eigen::VectorXd gamma_fit_IWLS_method(Eigen::MatrixXd x, Eigen::VectorXd y, Eige
 {
     int n = x.rows();
     int p = x.cols();
-
+    int max_iter = 80;
     Eigen::VectorXd coef = Eigen::VectorXd::Zero(p + 1);
     if (p == 0)
     {
@@ -187,7 +187,7 @@ Eigen::VectorXd gamma_fit_IWLS_method(Eigen::MatrixXd x, Eigen::VectorXd y, Eige
     beta = coef.tail(p);
     double loglik_new, loglik = -loss_function(x,y,weights,beta,coef0,lambda);
 
-    for (int j = 0; j < 200; j++)
+    for (int j = 0; j < max_iter; j++)
     {
         for (int i = 0; i < p + 1; i++)
         {
@@ -216,7 +216,7 @@ Eigen::VectorXd gamma_fit_IWLS_method(Eigen::MatrixXd x, Eigen::VectorXd y, Eige
         W = EY_square.cwiseProduct(weights);
         Z = X * coef - (y - EY).cwiseQuotient(EY_square);
     }
-    
+
     return coef;
 }
 

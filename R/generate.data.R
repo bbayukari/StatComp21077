@@ -1,4 +1,4 @@
-#' @title Generate simulated data
+#' @title Generate simulated data.
 #'
 #' @description Generate simulated data under the
 #' generalized linear model and Cox proportional hazard model.

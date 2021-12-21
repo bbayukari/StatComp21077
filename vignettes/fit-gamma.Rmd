@@ -1,0 +1,77 @@
+---
+title: "fit-gamma"
+author: "ZeZhi Wang"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{fit-gamma}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(StatComp21077)
+```
+
+## Overview
+
+__StatComp21077__ is a simple R package developed to fit gamma model which is an example of generalized linear model. We implement two methods for fitting, and a function to generate simulated data. Here, we will compare the performance and accuracy of them and __stats::glm__ function. Two functions are considered, namely, __fit.gamma.IWLS__ (fit the gamma model with IWLS method) and __fit.gamma.appro__ (fit the gamma model with approximate newton method). In addition, the needed simulated data will be generate by __generate.data__.
+
+The R package 'microbenchmark' can be used to benchmark the above functions.
+
+## Run code
+
+It is worth mentioning that __stats::glm__ will report "Error: no valid set of coefficients has been found: please supply starting values" when fitting gamma model if the the start value isn't specified. However, there is no such problem in the both function __fit.gamma.IWLS__ and __fit.gamma.appro__ given by __StatComp21077__.
+
+
+```{r,eval=TRUE}
+library(microbenchmark)
+dataset <- generate.data(1000, 10, 10,family = "gamma", seed = 1)
+
+start_point <- c(abs(min(dataset[["x"]] %*% rep(1, 10))) + 1, rep(1, 10))
+tm <- microbenchmark(
+  coef.appro <- fit.gamma.appro(dataset[["x"]],dataset[["y"]]),
+  coef.IWLS <- fit.gamma.IWLS(dataset[["x"]],dataset[["y"]]),
+  coef.appro.start_point <- fit.gamma.appro(dataset[["x"]],dataset[["y"]],start = start_point),
+  coef.IWLS.start_point <- fit.gamma.IWLS(dataset[["x"]],dataset[["y"]],start = start_point),
+  coef.glm <- glm(y ~ ., data = cbind.data.frame("y" = dataset[["y"]],dataset[["x"]]), family = "Gamma", start = start_point)
+)
+```
+
+## Performance
+
+```{r,eval=TRUE}
+name <- c("appro","IWLS","appro with start point","IWLS with start point","glm with start point")
+knitr::kable(cbind(name,summary(tm)[,c(2,4,5)]))
+```
+
+We can easily find that the both methods are faster than __stats::glm__ whether the start value is specified or not.
+
+## Accuracy
+
+```{r,eval=TRUE}
+mse <- function(est, true){
+  mean((est - true)^2)
+}
+true <- coef(coef.glm)
+deviation <- round(c(
+  mse(coef.appro,true),
+  mse(coef.IWLS,true),
+  mse(coef.appro.start_point,true),
+  mse(coef.IWLS.start_point,true)
+),3)
+
+knitr::kable(cbind(name[-5],deviation))
+```
+
+
+We can find that the results are similar with __stats::glm__.
+
+
+

@@ -23,11 +23,24 @@ bi_chain_cpp <- function(num = 10000L, a = 1L, b = 1L, n = 100L) {
 #' @param x Input matrix, of dimension \eqn{n \times p}; each row is an observation vector and each column is a predictor/feature/variable.
 #' @param y The response variable, of \code{n} observations.
 #' @param weights Observation weights.
-#' @param beta Linear coefficient.
-#' @param coef0 Intercept.
+#' @param beta Initial value of linear coefficient.
+#' @param coef0 Initial value of intercept.
 #' @param lambda L2 penalty coefficient.
-#' @return NULL
+#' @return Intercept and linear coefficient.
 gamma_fit_approximate_newton_method <- function(x, y, weights, beta, coef0, lambda) {
-    invisible(.Call('_StatComp21077_gamma_fit_approximate_newton_method', PACKAGE = 'StatComp21077', x, y, weights, beta, coef0, lambda))
+    .Call('_StatComp21077_gamma_fit_approximate_newton_method', PACKAGE = 'StatComp21077', x, y, weights, beta, coef0, lambda)
+}
+
+#' @title gamma fit IWLS method
+#' @description fit gamma model with IWLS method.
+#' @param x Input matrix, of dimension \eqn{n \times p}; each row is an observation vector and each column is a predictor/feature/variable.
+#' @param y The response variable, of \code{n} observations.
+#' @param weights Observation weights.
+#' @param beta Initial value of linear coefficient.
+#' @param coef0 Initial value of intercept.
+#' @param lambda L2 penalty coefficient.
+#' @return Intercept and linear coefficient.
+gamma_fit_IWLS_method <- function(x, y, weights, beta, coef0, lambda) {
+    .Call('_StatComp21077_gamma_fit_IWLS_method', PACKAGE = 'StatComp21077', x, y, weights, beta, coef0, lambda)
 }
 
