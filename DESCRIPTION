@@ -1,7 +1,7 @@
 Package: StatComp21077
 Type: Package
 Title: optimize the gamma model of generalized linear model 
-Version: 0.1.0
+Version: 1.0.0
 Author: Zezhi Wang
 Maintainer: Zezhi Wang <homura@mail.ustc.edu.cn>
 Description: Optimize the gamma model which is an example of generalized linear model, and some homework of Statistic Compute. 

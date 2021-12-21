@@ -1243,7 +1243,7 @@ FUN <- function(x) x^2
 ```
 
 
-```{r}
+```{r, eval=FALSE}
 cl <- makeCluster(getOption("cl.cores", detectCores()))
 system.time({res <- sapply(x, FUN)})
 system.time({res <- mcsapply(cl,x, FUN)})
