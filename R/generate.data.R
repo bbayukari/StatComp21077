@@ -132,7 +132,7 @@ generate.data <- function(n,
                           class.num = 3,
                           seed = 1) {
     # sigma <- 1
-
+    intercept <- 1
     family <- match.arg(family)
     if (family == "mgaussian") {
         y_dim <- y.dim
@@ -316,7 +316,8 @@ generate.data <- function(n,
         M <- 50 * m
         if (is.null(input_beta)) {
             beta <- numeric(p)
-            beta[nonzero] <- stats::runif(support.size, m, M)*10
+            beta[nonzero] <- stats::runif(support.size, -M, M)
+            intercept <- sort(stats::runif(y_dim-1,-M,M))
         } else {
             beta <- input_beta
         }
@@ -327,7 +328,7 @@ generate.data <- function(n,
         logit <- matrix(0,n,y_dim-1)
         for(i1 in 1:n){
             for(i2 in 1:y_dim-1){
-                logit[i1,i2] = 1.0/(1+exp(-xbeta[i1]-i2))
+                logit[i1,i2] = 1.0/(1+exp(-xbeta[i1]-intercept[i2]))
             }
         }
         # compute prob_y
@@ -362,7 +363,8 @@ generate.data <- function(n,
         sigma <- sqrt((t(beta) %*% Sigma %*% beta) / snr)
         eta <- x %*% beta + stats::rnorm(n, 0, sigma)
         # set coef_0 as + abs(min(eta)) + 1
-        eta <- eta + abs(min(eta)) + 10
+        intercept <- abs(min(eta)) + 10
+        eta <- eta + intercept
         # set the shape para of gamma uniformly in [0.1,100.1]
         shape_para <- 100 * stats::runif(n) + 0.1
         y <- stats::rgamma(n, shape = shape_para, rate = shape_para * eta)
@@ -370,7 +372,7 @@ generate.data <- function(n,
     set.seed(NULL)
 
     colnames(x) <- paste0("x", 1:p)
-    return(list(x = x, y = y, beta = beta))
+    return(list(x = x, y = y, intercept = intercept,beta = beta))
 }
 
 generatedata2 <- function(eta) {

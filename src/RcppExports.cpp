@@ -11,20 +11,6 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
-// bi_chain_cpp
-NumericMatrix bi_chain_cpp(int num, int a, int b, int n);
-RcppExport SEXP _StatComp21077_bi_chain_cpp(SEXP numSEXP, SEXP aSEXP, SEXP bSEXP, SEXP nSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< int >::type num(numSEXP);
-    Rcpp::traits::input_parameter< int >::type a(aSEXP);
-    Rcpp::traits::input_parameter< int >::type b(bSEXP);
-    Rcpp::traits::input_parameter< int >::type n(nSEXP);
-    rcpp_result_gen = Rcpp::wrap(bi_chain_cpp(num, a, b, n));
-    return rcpp_result_gen;
-END_RCPP
-}
 // gamma_fit_approximate_newton_method
 Eigen::VectorXd gamma_fit_approximate_newton_method(Eigen::MatrixXd x, Eigen::VectorXd y, Eigen::VectorXd weights, Eigen::VectorXd beta, double coef0, double lambda);
 RcppExport SEXP _StatComp21077_gamma_fit_approximate_newton_method(SEXP xSEXP, SEXP ySEXP, SEXP weightsSEXP, SEXP betaSEXP, SEXP coef0SEXP, SEXP lambdaSEXP) {
@@ -57,11 +43,75 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// pro
+Eigen::MatrixXd pro(Eigen::MatrixXd X, Eigen::MatrixXd beta, Eigen::VectorXd coef0);
+RcppExport SEXP _StatComp21077_pro(SEXP XSEXP, SEXP betaSEXP, SEXP coef0SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Eigen::MatrixXd >::type X(XSEXP);
+    Rcpp::traits::input_parameter< Eigen::MatrixXd >::type beta(betaSEXP);
+    Rcpp::traits::input_parameter< Eigen::VectorXd >::type coef0(coef0SEXP);
+    rcpp_result_gen = Rcpp::wrap(pro(X, beta, coef0));
+    return rcpp_result_gen;
+END_RCPP
+}
+// grad_cpp
+Eigen::MatrixXd grad_cpp(Eigen::MatrixXd X, Eigen::MatrixXd y, Eigen::MatrixXd beta, Eigen::VectorXd coef0);
+RcppExport SEXP _StatComp21077_grad_cpp(SEXP XSEXP, SEXP ySEXP, SEXP betaSEXP, SEXP coef0SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Eigen::MatrixXd >::type X(XSEXP);
+    Rcpp::traits::input_parameter< Eigen::MatrixXd >::type y(ySEXP);
+    Rcpp::traits::input_parameter< Eigen::MatrixXd >::type beta(betaSEXP);
+    Rcpp::traits::input_parameter< Eigen::VectorXd >::type coef0(coef0SEXP);
+    rcpp_result_gen = Rcpp::wrap(grad_cpp(X, y, beta, coef0));
+    return rcpp_result_gen;
+END_RCPP
+}
+// loss_function
+double loss_function(Eigen::MatrixXd& X, Eigen::MatrixXd& y, Eigen::VectorXd& weights, Eigen::MatrixXd& beta, Eigen::VectorXd& coef0, double lambda);
+RcppExport SEXP _StatComp21077_loss_function(SEXP XSEXP, SEXP ySEXP, SEXP weightsSEXP, SEXP betaSEXP, SEXP coef0SEXP, SEXP lambdaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Eigen::MatrixXd& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< Eigen::MatrixXd& >::type y(ySEXP);
+    Rcpp::traits::input_parameter< Eigen::VectorXd& >::type weights(weightsSEXP);
+    Rcpp::traits::input_parameter< Eigen::MatrixXd& >::type beta(betaSEXP);
+    Rcpp::traits::input_parameter< Eigen::VectorXd& >::type coef0(coef0SEXP);
+    Rcpp::traits::input_parameter< double >::type lambda(lambdaSEXP);
+    rcpp_result_gen = Rcpp::wrap(loss_function(X, y, weights, beta, coef0, lambda));
+    return rcpp_result_gen;
+END_RCPP
+}
+// fit_ordinal
+Eigen::VectorXd fit_ordinal(Eigen::MatrixXd X, Eigen::MatrixXd y, Eigen::VectorXd weights, Eigen::MatrixXd beta, Eigen::VectorXd coef0, double lambda, int primary_model_fit_max_iter, double step0);
+RcppExport SEXP _StatComp21077_fit_ordinal(SEXP XSEXP, SEXP ySEXP, SEXP weightsSEXP, SEXP betaSEXP, SEXP coef0SEXP, SEXP lambdaSEXP, SEXP primary_model_fit_max_iterSEXP, SEXP step0SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Eigen::MatrixXd >::type X(XSEXP);
+    Rcpp::traits::input_parameter< Eigen::MatrixXd >::type y(ySEXP);
+    Rcpp::traits::input_parameter< Eigen::VectorXd >::type weights(weightsSEXP);
+    Rcpp::traits::input_parameter< Eigen::MatrixXd >::type beta(betaSEXP);
+    Rcpp::traits::input_parameter< Eigen::VectorXd >::type coef0(coef0SEXP);
+    Rcpp::traits::input_parameter< double >::type lambda(lambdaSEXP);
+    Rcpp::traits::input_parameter< int >::type primary_model_fit_max_iter(primary_model_fit_max_iterSEXP);
+    Rcpp::traits::input_parameter< double >::type step0(step0SEXP);
+    rcpp_result_gen = Rcpp::wrap(fit_ordinal(X, y, weights, beta, coef0, lambda, primary_model_fit_max_iter, step0));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_StatComp21077_bi_chain_cpp", (DL_FUNC) &_StatComp21077_bi_chain_cpp, 4},
     {"_StatComp21077_gamma_fit_approximate_newton_method", (DL_FUNC) &_StatComp21077_gamma_fit_approximate_newton_method, 6},
     {"_StatComp21077_gamma_fit_IWLS_method", (DL_FUNC) &_StatComp21077_gamma_fit_IWLS_method, 6},
+    {"_StatComp21077_pro", (DL_FUNC) &_StatComp21077_pro, 3},
+    {"_StatComp21077_grad_cpp", (DL_FUNC) &_StatComp21077_grad_cpp, 4},
+    {"_StatComp21077_loss_function", (DL_FUNC) &_StatComp21077_loss_function, 6},
+    {"_StatComp21077_fit_ordinal", (DL_FUNC) &_StatComp21077_fit_ordinal, 8},
     {NULL, NULL, 0}
 };
 

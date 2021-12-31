@@ -1,28 +1,22 @@
 Package: StatComp21077
 Type: Package
-Title: optimize the gamma model of generalized linear model 
+Title: use to test the abess 
 Version: 1.0.0
 Author: Zezhi Wang
 Maintainer: Zezhi Wang <homura@mail.ustc.edu.cn>
-Description: Optimize the gamma model which is an example of generalized linear model, and some homework of Statistic Compute. 
+Description: use to test the abess. 
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.2
 Imports: 
     MASS,
-    Rcpp,
-    microbenchmark
+    Rcpp
 LinkingTo: 
     Rcpp,
     RcppEigen
 Suggests: 
     rmarkdown,
     knitr,
-    bootstrap,
-    boot,
-    RANN,
-    energy,
-    Ball,
-    parallel
+    microbenchmark
 VignetteBuilder: knitr
