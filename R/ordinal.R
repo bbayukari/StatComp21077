@@ -14,12 +14,9 @@ fit.ordinal <- function(x, y, iter=200, lambda = 0, step = 1){
 }
 
 one.hot <- function(y){
-    num <- max(y)+1
-    ans <- matrix(0,length(y),num)
-    for(i in 1:length(y)){
-        ans[i,y[i]+1] <- 1
-    }
-    return (ans)
+    y <- model.matrix(~ factor(as.numeric(y) - 1) + 0)
+    colnames(y) <- NULL
+    y
 }
 
 #' @export
@@ -97,7 +94,7 @@ TNR <- function(true_beta_idx,fit_beta_idx,p){
 
 #' @export
 ReErr <- function(true_beta,fit_beta){
-    sum((true_beta - fit_beta)^2) / sum(true_beta^2)
+    sum((true_beta - fit_beta)^2) / sum(true_beta^2) * 100
 }
 
 #' @export
@@ -107,7 +104,7 @@ SLE <- function(true_beta_idx,fit_beta_idx){
 
 #' @export
 MR <- function(x,y,beta,intercept){
-    sum(predict(x,beta,intercept) != y) / length(y)
+    sum(predict(x,beta,intercept) != y) / length(y) * 100
 }
 
 #' @export
