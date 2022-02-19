@@ -94,7 +94,7 @@ TNR <- function(true_beta_idx,fit_beta_idx,p){
 
 #' @export
 ReErr <- function(true_beta,fit_beta){
-    sum((true_beta - fit_beta)^2) / sum(true_beta^2) * 100
+    sum((true_beta - fit_beta)^2) / sum(true_beta^2)
 }
 
 #' @export
@@ -104,7 +104,7 @@ SLE <- function(true_beta_idx,fit_beta_idx){
 
 #' @export
 MR <- function(x,y,beta,intercept){
-    sum(predict(x,beta,intercept) != y) / length(y) * 100
+    sum(predict(x,beta,intercept) != y) / length(y)
 }
 
 #' @export

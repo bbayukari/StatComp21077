@@ -362,3 +362,6 @@ Eigen::VectorXd fit_ordinal(Eigen::MatrixXd X, Eigen::MatrixXd y, Eigen::VectorX
 
     return coef;
   }
+
+
+

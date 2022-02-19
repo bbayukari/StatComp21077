@@ -1,7 +1,7 @@
 Package: StatComp21077
 Type: Package
 Title: use to test the abess 
-Version: 1.0.0
+Version: 0.1.0
 Author: Zezhi Wang
 Maintainer: Zezhi Wang <homura@mail.ustc.edu.cn>
 Description: use to test the abess. 

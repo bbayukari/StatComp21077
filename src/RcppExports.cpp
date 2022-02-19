@@ -104,6 +104,36 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// loss_API
+double loss_API(int n, Eigen::MatrixXd X, Eigen::VectorXd y, Eigen::VectorXd beta, SEXP xpsexp);
+RcppExport SEXP _StatComp21077_loss_API(SEXP nSEXP, SEXP XSEXP, SEXP ySEXP, SEXP betaSEXP, SEXP xpsexpSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< Eigen::MatrixXd >::type X(XSEXP);
+    Rcpp::traits::input_parameter< Eigen::VectorXd >::type y(ySEXP);
+    Rcpp::traits::input_parameter< Eigen::VectorXd >::type beta(betaSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type xpsexp(xpsexpSEXP);
+    rcpp_result_gen = Rcpp::wrap(loss_API(n, X, y, beta, xpsexp));
+    return rcpp_result_gen;
+END_RCPP
+}
+// gradient_API
+Eigen::VectorXd gradient_API(int n, Eigen::MatrixXd& X, Eigen::VectorXd& y, Eigen::VectorXd& beta, SEXP xpsexp);
+RcppExport SEXP _StatComp21077_gradient_API(SEXP nSEXP, SEXP XSEXP, SEXP ySEXP, SEXP betaSEXP, SEXP xpsexpSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< Eigen::MatrixXd& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< Eigen::VectorXd& >::type y(ySEXP);
+    Rcpp::traits::input_parameter< Eigen::VectorXd& >::type beta(betaSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type xpsexp(xpsexpSEXP);
+    rcpp_result_gen = Rcpp::wrap(gradient_API(n, X, y, beta, xpsexp));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_StatComp21077_gamma_fit_approximate_newton_method", (DL_FUNC) &_StatComp21077_gamma_fit_approximate_newton_method, 6},
@@ -112,6 +142,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_StatComp21077_grad_cpp", (DL_FUNC) &_StatComp21077_grad_cpp, 4},
     {"_StatComp21077_loss_function", (DL_FUNC) &_StatComp21077_loss_function, 6},
     {"_StatComp21077_fit_ordinal", (DL_FUNC) &_StatComp21077_fit_ordinal, 8},
+    {"_StatComp21077_loss_API", (DL_FUNC) &_StatComp21077_loss_API, 5},
+    {"_StatComp21077_gradient_API", (DL_FUNC) &_StatComp21077_gradient_API, 5},
     {NULL, NULL, 0}
 };
 

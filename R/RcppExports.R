@@ -43,3 +43,11 @@ fit_ordinal <- function(X, y, weights, beta, coef0, lambda, primary_model_fit_ma
     .Call('_StatComp21077_fit_ordinal', PACKAGE = 'StatComp21077', X, y, weights, beta, coef0, lambda, primary_model_fit_max_iter, step0)
 }
 
+loss_API <- function(n, X, y, beta, xpsexp) {
+    .Call('_StatComp21077_loss_API', PACKAGE = 'StatComp21077', n, X, y, beta, xpsexp)
+}
+
+gradient_API <- function(n, X, y, beta, xpsexp) {
+    .Call('_StatComp21077_gradient_API', PACKAGE = 'StatComp21077', n, X, y, beta, xpsexp)
+}
+

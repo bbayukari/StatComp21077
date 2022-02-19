@@ -1,0 +1,71 @@
+---
+title: "process-data"
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+---
+```{r}
+library(ggplot2)
+library(Rmisc)
+load("ordinal-data.Rdata")
+low.dim.data <- ordinal.data$low
+high.dim.data <- ordinal.data$high
+limit.data <- ordinal.data$limit
+term <- c("TPR","TNR","ReErr","SLE","BS","MR")
+```
+
+class.num = 4
+
+support.size = 10
+
+## low dim case
+
+n = 500 
+
+p = 20,25,30,35,40
+```{r}
+fig <- list()
+for(i in 1:6){
+    fig[[i]] <- ggplot(ordinal.data$low, aes(x=p, y=.data[[term[i]]], fill = method)) +  geom_boxplot()
+}
+multiplot(plotlist = fig[1:6], cols = 2)
+```
+
+```{r}
+ggplot(ordinal.data$low, aes(x=p, y=time, color = method)) +  geom_point() + geom_smooth(method="lm",se=FALSE)
+```
+
+## high dim case
+
+n = 500  
+p = 500,1500,2500
+
+```{r}
+fig <- list()
+for(i in 1:6){
+    fig[[i]] <- ggplot(ordinal.data$high, aes(x=p, y=.data[[term[i]]], fill = method)) +  geom_boxplot()
+}
+multiplot(plotlist = fig[1:6], cols = 2)
+```
+
+```{r}
+ggplot(ordinal.data$high, aes(x=p, y=time, color = method)) +  geom_point() + stat_smooth(formula = time~as.numeric(p),method="lm")
+```
+
+## limit case
+
+p = 500 
+n = 100,200,400,800,1600
+
+```{r}
+fig <- list()
+for(i in 1:6){
+    fig[[i]] <- ggplot(ordinal.data$limit, aes(x=n, y=.data[[term[i]]], fill = method)) +  geom_boxplot()
+}
+multiplot(plotlist = fig[1:6], cols = 2)
+```
+
+```{r}
+ggplot(ordinal.data$limit, aes(x=n, y=time, color = method)) +  geom_point() + stat_smooth(formula = time~as.numeric(n),method="lm")
+```
